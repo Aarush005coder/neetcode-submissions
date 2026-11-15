@@ -1,17 +1,115 @@
-Problem:
-You are given a non-empty array of integers nums. Every integer appears twice except for one.
-Return the integer that appears only once.
-You must implement a solution with O(n) runtime complexity and use only O(1) extra space.
+/*
+------------------------------------------------------------
+Problem    : Single Number
+Platform   : NeetCode 
+Topic      : Bit Manipulation / Array
+Difficulty : Easy
 
-Code:
+Problem:
+You are given a non-empty array of integers `nums`. 
+Every integer appears twice except for one.
+Return the integer that appears only once.
+
+Important:
+You must implement a solution with O(n) runtime complexity 
+and use only O(1) extra space.
+
+Approach:
+We can solve this problem elegantly using the Bitwise XOR operator (`^`).
+XOR has three fundamental properties that make it perfect for this problem:
+1. Identity: `a ^ 0 = a` (XORing with 0 leaves the number unchanged).
+2. Self-Inverse: `a ^ a = 0` (XORing a number with itself results in 0).
+3. Commutative & Associative: `a ^ b ^ c = a ^ c ^ b` (Order of operations does not matter).
+
+Since every number except one appears exactly twice, XORing all the 
+elements in the array will cause all the paired numbers to cancel each 
+other out (become 0). The only number remaining will be the one that 
+appears exactly once, because `x ^ 0 = x`.
+
+Why do we use Bitwise XOR?
+A Hash Map could solve this in O(N) time, but it would require O(N) 
+extra space to store the frequencies, violating the O(1) space constraint. 
+Sorting would take O(N log N) time, violating the O(N) time constraint. 
+XOR gives us the optimal O(N) time and O(1) space solution.
+
+Example:
+nums = [4, 1, 2, 1, 2]
+
+Step 1: Initialize `res = 0`.
+Step 2: Iterate through the array and XOR each element with `res`.
+    res = 0 ^ 4 = 4
+    res = 4 ^ 1 = 5
+    res = 5 ^ 2 = 7
+    res = 7 ^ 1 = 6
+    res = 6 ^ 2 = 4
+
+Mathematically, this is equivalent to:
+    4 ^ 1 ^ 2 ^ 1 ^ 2
+  = 4 ^ (1 ^ 1) ^ (2 ^ 2)   (Rearranging due to commutativity)
+  = 4 ^ 0 ^ 0               (Self-inverse property)
+  = 4                       (Identity property)
+
+Result: 4
+
+------------------------------------------------------------
+Dry Run: nums = [2, 2, 1]
+------------------------------------------------------------
+
+Initialize: res = 0
+
+Iteration 1 (i = 0):
+    nums[0] = 2
+    res = 0 ^ 2 = 2
+
+Iteration 2 (i = 1):
+    nums[1] = 2
+    res = 2 ^ 2 = 0  (The pair cancels out!)
+
+Iteration 3 (i = 2):
+    nums[2] = 1
+    res = 0 ^ 1 = 1  (The single number remains)
+
+Loop ends.
+Return res = 1.
+
+------------------------------------------------------------
+Algorithm
+------------------------------------------------------------
+
+1. Initialize a variable `res = 0`.
+2. Iterate through each number `num` in the array `nums`:
+       res = res ^ num
+3. Return `res`.
+
+------------------------------------------------------------
+Complexity
+------------------------------------------------------------
+
+Time Complexity:
+    O(N)
+    where N is the number of elements in the array. We iterate 
+    through the array exactly once, performing a constant-time 
+    bitwise operation in each step.
+
+Space Complexity:
+    O(1)
+    We only use a single integer variable `res` to accumulate 
+    the XOR result, requiring constant extra memory regardless 
+    of the input size.
+
+------------------------------------------------------------
+*/
+
 class Solution {
     public int singleNumber(int[] nums) {
         int res = 0;
 
-        for(int i=0; i<nums.length; i++){
+        // XOR all elements in the array
+        for (int i = 0; i < nums.length; i++) {
             res ^= nums[i];
         }
 
+        // The remaining value is the single number
         return res;
     }
 }
