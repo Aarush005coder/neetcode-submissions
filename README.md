@@ -22,8 +22,8 @@ I am using this repository to track my progress, understand different approaches
 
 ## 📚 Topics Covered
 
-| # | Topic | Status |
-|---|---|---|
+| # | Topic |
+|---|---|
 | 01 | Arrays & Hashing | 
 | 02 | Two Pointers | 
 | 03 | Sliding Window | 
@@ -53,49 +53,6 @@ I am using this repository to track my progress, understand different approaches
 | **Total** | **1** |
 
 *Progress will be updated as I solve more problems.*
-
-## 📁 Repository Structure
-
-```text
-NeetCode-Java/
-│
-├── ArraysAndHashing/
-│   ├── ContainsDuplicate.java
-│   ├── ValidAnagram.java
-│   └── TwoSum.java
-│
-├── TwoPointers/
-│
-├── SlidingWindow/
-│
-├── Stack/
-│
-├── BinarySearch/
-│
-├── LinkedList/
-│
-├── Trees/
-│
-├── Tries/
-│
-├── HeapPriorityQueue/
-│
-├── Backtracking/
-│
-├── Graphs/
-│
-├── AdvancedGraphs/
-│
-├── DynamicProgramming/
-│
-├── Greedy/
-│
-├── Intervals/
-│
-├── MathGeometry/
-│
-└── BitManipulation/
-```
 
 ## 📝 Solution Format
 
