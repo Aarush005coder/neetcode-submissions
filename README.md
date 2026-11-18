@@ -47,10 +47,10 @@ I am using this repository to track my progress, understand different approaches
 
 | Difficulty | Solved |
 |---|---:|
-| 🟢 Easy | 1 |
+| 🟢 Easy | 2 |
 | 🟡 Medium | 0 |
 | 🔴 Hard | 0 |
-| **Total** | **1** |
+| **Total** | **2** |
 
 *Progress will be updated as I solve more problems.*
 
