@@ -1,0 +1,122 @@
+/*
+------------------------------------------------------------
+Problem    : Two Sum
+Platform   : NeetCode
+Topic      : Array / Hash Map
+Difficulty : Easy
+
+Problem:
+Given an array of integers `nums` and an integer `target`, 
+return the indices `i` and `j` such that `nums[i] + nums[j] == target` 
+and `i != j`.
+
+You may assume that every input has exactly one pair of indices 
+that satisfy the condition. Return the answer with the smaller 
+index first.
+
+Approach:
+While a brute-force approach using nested loops works, it takes 
+O(N^2) time. We can optimize this to O(N) time using a Hash Map.
+
+As we iterate through the array, we calculate the `complement` 
+needed to reach the target (`complement = target - current_number`). 
+We then check if this `complement` already exists in our Hash Map. 
+- If it does, we have found our pair! We return the stored index 
+  of the complement and the current index.
+- If it does not, we add the current number and its index to the 
+  Hash Map and continue to the next element.
+
+Why do we use a Hash Map?
+A Hash Map provides O(1) average time complexity for lookups and 
+insertions. By storing the numbers we have seen so far, we avoid 
+the need to scan the rest of the array for the complement, reducing 
+the time complexity from O(N^2) to O(N).
+
+Example:
+nums = [3, 4, 5, 6], target = 7
+
+Step 1: Initialize an empty Hash Map: map = {}
+Step 2: i = 0, num = 3. 
+        complement = 7 - 3 = 4. 
+        Is 4 in map? No. 
+        Add 3 to map: map = {3: 0}
+Step 3: i = 1, num = 4. 
+        complement = 7 - 4 = 3. 
+        Is 3 in map? Yes! Its index is 0.
+        Return [map.get(3), i] -> [0, 1].
+
+------------------------------------------------------------
+Dry Run: nums = [2, 7, 11, 15], target = 9
+------------------------------------------------------------
+
+Initialize: map = {}
+
+Iteration 1 (i = 0):
+    num = 2
+    complement = 9 - 2 = 7
+    Is 7 in map? No.
+    map.put(2, 0) -> map = {2: 0}
+
+Iteration 2 (i = 1):
+    num = 7
+    complement = 9 - 7 = 2
+    Is 2 in map? Yes! Index is 0.
+    Return [0, 1].
+
+------------------------------------------------------------
+Algorithm
+------------------------------------------------------------
+
+1. Initialize a HashMap `map` to store (number -> index).
+2. Iterate through the array with index `i` and value `num`:
+   a. Calculate `complement = target - num`.
+   b. If `map` contains `complement`:
+        return new int[]{map.get(complement), i}
+   c. Else:
+        map.put(num, i)
+3. Return an empty array (or throw an exception) if no solution 
+   is found (though the problem guarantees exactly one solution).
+
+------------------------------------------------------------
+Complexity
+------------------------------------------------------------
+
+Time Complexity:
+    O(N)
+    where N is the number of elements in the array. We traverse 
+    the array containing N elements only once. Each lookup and 
+    insertion in the Hash Map takes O(1) average time.
+
+Space Complexity:
+    O(N)
+    The extra space required depends on the number of items stored 
+    in the Hash Map, which stores at most N elements.
+
+------------------------------------------------------------
+*/
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // HashMap to store the value and its corresponding index
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+
+            // If the complement exists in the map, we found our pair
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+
+            // Otherwise, add the current number and its index to the map
+            map.put(nums[i], i);
+        }
+
+        // The problem guarantees exactly one solution, so this line 
+        // is technically unreachable, but required by the compiler.
+        return new int[]{};
+    }
+}
